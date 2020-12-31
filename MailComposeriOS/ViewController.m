@@ -43,12 +43,15 @@
     else
     {
         //show alert if device cannot send email or email is not set up
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                        message:@"Sorry your device doesn't seem to support the mail composer sheet."
-                                                       delegate:self
-                                              cancelButtonTitle:@"Dissmiss"
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error!"
+                                   message:@"Sorry your device doesn't seem to support the mail composer sheet."
+                                   preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Dissmiss" style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {}];
+
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
         
     }
     
@@ -79,12 +82,16 @@
     else
     {
         //show alert if device cannot send text message
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                        message:@"Sorry your device doesn't seem to support the message composer."
-                                                       delegate:self
-                                              cancelButtonTitle:@"Dissmiss"
-                                              otherButtonTitles:nil];
-        [alert show];
+   
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error!"
+                                   message:@"Sorry your device doesn't seem to support the sms composer sheet."
+                                   preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Dissmiss" style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {}];
+
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
         
     }
     
@@ -109,8 +116,17 @@
         case MFMailComposeResultFailed:
         {
             NSLog(@"Mail sent failure: %@", [error localizedDescription]);
-            UIAlertView *mailSendingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send Email!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [mailSendingFailedAlert show];
+           
+            UIAlertController* mailSendingFailedAlert = [UIAlertController alertControllerWithTitle:@"Error!"
+                                       message:@"Failed to send Email!"
+                                       preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * action) {}];
+
+            [mailSendingFailedAlert addAction:defaultAction];
+            [self presentViewController:mailSendingFailedAlert animated:YES completion:nil];
+            
             break;
         }
             
@@ -135,8 +151,17 @@
         case MessageComposeResultFailed:
         {
             NSLog(@"Message Sending Failed");
-            UIAlertView *messageSendingFailedAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [messageSendingFailedAlert show];
+            
+            UIAlertController* mailSendingFailedAlert = [UIAlertController alertControllerWithTitle:@"Error!"
+                                       message:@"Failed to send SMS!"
+                                       preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * action) {}];
+
+            [mailSendingFailedAlert addAction:defaultAction];
+            [self presentViewController:mailSendingFailedAlert animated:YES completion:nil];
+            
             break;
         }
             
